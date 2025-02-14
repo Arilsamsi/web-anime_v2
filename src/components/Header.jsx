@@ -32,12 +32,17 @@ function Header() {
 
   return (
     <div>
-      <nav className="fixed w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
+      <nav className="fixed h-20 w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
         <div className="container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <a href="/">
-                <h1 className="text-2xl font-bold text-primary">AnimePlay</h1>
+                {/* <h1 className="text-2xl font-bold text-primary">AnimePlay</h1> */}
+                <img
+                  className="w-[65px] h-[65px] mt-3"
+                  src="/logo.png"
+                  alt=""
+                />
               </a>
             </div>
 
