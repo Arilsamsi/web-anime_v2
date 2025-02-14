@@ -8,6 +8,18 @@ const AnimePlayer = () => {
   const [episodeData, setEpisodeData] = useState(null);
   const [selectedServerId, setSelectedServerId] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [theme, setTheme] = useState("light");
+
+  // Ambil tema dari preferensi pengguna
+  useEffect(() => {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(isDark ? "dark" : "light");
+  }, []);
+
+  // Terapkan tema ke halaman
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   useEffect(() => {
     const fetchEpisode = async () => {
@@ -54,7 +66,7 @@ const AnimePlayer = () => {
   }, [selectedServerId]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 pt-[65px]">
+    <div className={`min-h-screen bg-background text-foreground p-6 pt-[65px]`}>
       <div className="container mx-auto">
         <button
           onClick={() => navigate(-1)}

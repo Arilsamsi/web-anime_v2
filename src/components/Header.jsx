@@ -32,7 +32,7 @@ function Header() {
 
   return (
     <div>
-      <nav className="fixed w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
+      <nav className="fixed w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
         <div className="container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">

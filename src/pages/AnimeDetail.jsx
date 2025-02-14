@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   Star,
   Clock,
@@ -17,7 +17,7 @@ const AnimeDetail = () => {
   const { animeId } = useParams();
   // const navigate = useNavigate();
   const [anime, setAnime] = useState(null);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState("light");
   const [showFullSynopsis, setShowFullSynopsis] = useState(false);
   const [favoriteAnime, setFavoriteAnime] = useState([]);
 
@@ -46,13 +46,13 @@ const AnimeDetail = () => {
     setFavoriteAnime(savedFavorites);
   }, []);
 
-  // Toggle Theme
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+  // Ambil tema dari preferensi pengguna
+  useEffect(() => {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(isDark ? "dark" : "light");
+  }, []);
 
+  // Terapkan tema ke halaman
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
@@ -84,22 +84,8 @@ const AnimeDetail = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen transition-colors ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-      }`}
-    >
+    <div className="min-h-screen transition-colors bg-background text-foreground">
       {/* <Header /> */}
-
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={toggleTheme}
-          className="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition"
-        >
-          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-      </div>
-
       <div className="relative h-[70vh] md:h-[60vh] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center blur-xl"
@@ -113,9 +99,11 @@ const AnimeDetail = () => {
               className="w-40 md:w-64 rounded-lg shadow-lg"
             />
             <div className="text-center md:text-left">
-              <h1 className="text-2xl md:text-4xl font-bold">{anime.title}</h1>
+              <h1 className="text-2xl md:text-4xl font-bold text-white">
+                {anime.title}
+              </h1>
               <div className="flex flex-wrap gap-2 mt-2">
-                <span className="font-semibold">Genres:</span>
+                <span className="font-semibold text-white">Genres:</span>
                 {anime.genreList.map((genre, index) => (
                   <Link
                     key={genre.genreId}
@@ -129,11 +117,11 @@ const AnimeDetail = () => {
               <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
                 <div className="flex items-center gap-2">
                   <Star className="text-yellow-400" size={20} />
-                  <span>{anime.score.value}/10</span>
+                  <span className="text-white">{anime.score.value}/10</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-white">
                   <Clock size={20} />
-                  <span>{anime.duration}</span>
+                  <span className="text-white">{anime.duration}</span>
                 </div>
                 {/* Favorite Button */}
                 <button
