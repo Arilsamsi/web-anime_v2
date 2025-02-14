@@ -34,15 +34,11 @@ function Header() {
     <div>
       <nav className="fixed h-20 w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
         <div className="container">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <a href="/">
                 {/* <h1 className="text-2xl font-bold text-primary">AnimePlay</h1> */}
-                <img
-                  className="w-[65px] h-[65px] mt-3"
-                  src="/logo.png"
-                  alt=""
-                />
+                <img className="w-[65px] h-[65px]" src="/logo.png" alt="" />
               </a>
             </div>
 
@@ -61,7 +57,7 @@ function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center pt-[10px]">
+            <div className="md:hidden flex items-center">
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -83,17 +79,17 @@ function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-border">
-            <div className="container py-2">
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-lg">
+            <div className="text-center py-4 space-y-2">
               <a
                 href="/"
-                className="block py-2 hover:text-primary transition-colors"
+                className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
               >
                 Home
               </a>
               <a
                 href="/myanimelist"
-                className="block py-2 hover:text-primary transition-colors"
+                className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
               >
                 My List
               </a>
@@ -104,7 +100,7 @@ function Header() {
 
       {/* Search Input */}
       {isSearchOpen && (
-        <div className="fixed top-16 left-0 w-full bg-black/50 backdrop-blur-md p-4 flex justify-center z-50">
+        <div className="fixed top-20 left-0 w-full bg-black/50 backdrop-blur-md p-4 flex justify-center z-50">
           <input
             type="text"
             className="relative w-full p-2 text-lg rounded-md bg-white dark:bg-gray-800 text-black dark:text-white outline-none"
