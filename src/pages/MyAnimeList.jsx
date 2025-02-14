@@ -33,7 +33,7 @@ const MyAnimeList = () => {
 
   return (
     <div
-      className={`min-h-screen bg-background text-white px-4 py-10 pt-[70px]`}
+      className={`min-h-screen bg-background text-foreground px-4 py-10 pt-[70px]`}
     >
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">
@@ -57,7 +57,9 @@ const MyAnimeList = () => {
                   alt={anime.title}
                   className="w-full h-60 object-cover rounded-lg"
                 />
-                <h2 className="text-lg font-semibold mt-3">{anime.title}</h2>
+                <h2 className="text-lg font-semibold text-white mt-3">
+                  {anime.title}
+                </h2>
 
                 {/* Tombol Hapus */}
                 <button
