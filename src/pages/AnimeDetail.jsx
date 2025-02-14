@@ -84,7 +84,7 @@ const AnimeDetail = () => {
   };
 
   return (
-    <div className="min-h-screen transition-colors bg-background text-foreground">
+    <div className="min-h-screen transition-colors bg-background text-foreground pt-[84px]">
       {/* <Header /> */}
       <div className="relative h-[70vh] md:h-[60vh] overflow-hidden">
         <div

@@ -61,7 +61,7 @@ function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center pt-[10px]">
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}

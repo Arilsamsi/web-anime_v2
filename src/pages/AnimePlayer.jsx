@@ -66,7 +66,7 @@ const AnimePlayer = () => {
   }, [selectedServerId]);
 
   return (
-    <div className={`min-h-screen bg-background text-foreground p-6 pt-[65px]`}>
+    <div className={`min-h-screen bg-background text-foreground p-6 pt-[85px]`}>
       <div className="container mx-auto">
         <button
           onClick={() => navigate(-1)}

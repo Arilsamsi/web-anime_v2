@@ -33,7 +33,7 @@ const MyAnimeList = () => {
 
   return (
     <div
-      className={`min-h-screen bg-background text-foreground px-4 py-10 pt-[70px]`}
+      className={`min-h-screen bg-background text-foreground px-4 py-10 pt-[80px]`}
     >
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">

@@ -52,7 +52,7 @@ const SearchResult = () => {
 
   return (
     <div
-      className={`min-h-screen bg-background text-foreground transition-colors duration-300`}
+      className={`min-h-screen bg-background text-foreground transition-colors duration-300 pt-[10px]`}
     >
       {/* <Header /> */}
       <div className="container mx-auto px-4 py-6 pt-[70px]">
