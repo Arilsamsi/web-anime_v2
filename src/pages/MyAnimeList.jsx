@@ -96,11 +96,11 @@ const MyAnimeList = () => {
             No favorite anime added.
           </p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
             {favoriteAnime.map((anime) => (
               <div
                 key={anime.animeId}
-                className="relative group bg-gray-800 p-3 rounded-lg shadow-lg transition-transform transform hover:scale-105 max-w-[200px] mx-auto"
+                className="relative group bg-gray-800 p-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 max-w-[200px] mx-auto"
               >
                 {isSelecting && (
                   <input
