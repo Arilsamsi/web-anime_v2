@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, CheckSquare, XSquare } from "lucide-react";
+import { Trash2, CheckSquare, XSquare, CheckCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const MyAnimeList = () => {
@@ -44,6 +44,14 @@ const MyAnimeList = () => {
     );
   };
 
+  const toggleSelectAll = () => {
+    if (selectedAnime.length === favoriteAnime.length) {
+      setSelectedAnime([]);
+    } else {
+      setSelectedAnime(favoriteAnime.map((anime) => anime.animeId));
+    }
+  };
+
   const deleteSelected = () => {
     const updatedFavorites = favoriteAnime.filter(
       (anime) => !selectedAnime.includes(anime.animeId)
@@ -58,7 +66,7 @@ const MyAnimeList = () => {
     <div className="min-h-screen bg-background text-foreground px-4 py-10 pt-[80px]">
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">My Anime List</h1>
+          <h1 className="text-2xl font-bold">My Anime List</h1>
           <div className="flex gap-3 mt-2">
             {isSelecting ? (
               <>
@@ -74,10 +82,16 @@ const MyAnimeList = () => {
                   <Trash2 /> ({selectedAnime.length})
                 </button>
                 <button
+                  onClick={toggleSelectAll}
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition"
+                >
+                  <CheckCheck size={20} />
+                </button>
+                <button
                   onClick={toggleSelectMode}
                   className="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 transition"
                 >
-                  <XSquare size={20} className="" />
+                  <XSquare size={20} />
                 </button>
               </>
             ) : (
@@ -85,7 +99,7 @@ const MyAnimeList = () => {
                 onClick={toggleSelectMode}
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition"
               >
-                <CheckSquare size={20} className="" />
+                <CheckSquare size={20} />
               </button>
             )}
           </div>
