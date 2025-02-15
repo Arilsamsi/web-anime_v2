@@ -10,6 +10,7 @@ import {
   Moon,
   Bookmark,
   BookmarkCheck,
+  ArrowLeft,
 } from "lucide-react";
 // import Header from "../components/Header";
 
@@ -20,6 +21,7 @@ const AnimeDetail = () => {
   const [theme, setTheme] = useState("light");
   const [showFullSynopsis, setShowFullSynopsis] = useState(false);
   const [favoriteAnime, setFavoriteAnime] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   // Fetch anime details
   useEffect(() => {
@@ -84,13 +86,18 @@ const AnimeDetail = () => {
   };
 
   return (
-    <div className="min-h-screen transition-colors bg-background text-foreground pt-[84px]">
+    <div className="min-h-screen transition-colors bg-background text-foreground pt-[80px]">
       {/* <Header /> */}
       <div className="relative h-[70vh] md:h-[60vh] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center blur-xl"
           style={{ backgroundImage: `url(${anime.poster})` }}
         />
+        {/* <div className="flex items-center justify-stretch py-5 pl-4 z-[9999999999]">
+          <a href="/" className="text-red-500">
+            <ArrowLeft />
+          </a>
+        </div> */}
         <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center">
           <div className="container mx-auto px-4 flex flex-col md:flex-row gap-6 items-center">
             <img
@@ -107,7 +114,7 @@ const AnimeDetail = () => {
                 {anime.genreList.map((genre, index) => (
                   <Link
                     key={genre.genreId}
-                    to={genre.href}
+                    to={`/genres/${genre.genreId}`}
                     className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-700 transition"
                   >
                     {genre.title}

@@ -47,6 +47,12 @@ function Header() {
               <a href="/" className="nav-link">
                 Home
               </a>
+              <a href="/movies" className="nav-link">
+                Movies
+              </a>
+              <a href="/genres" className="nav-link">
+                Genres
+              </a>
               <a href="/myanimelist" className="nav-link">
                 My List
               </a>
@@ -86,6 +92,18 @@ function Header() {
                 className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
               >
                 Home
+              </a>
+              <a
+                href="/movies"
+                className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
+              >
+                Movies
+              </a>
+              <a
+                href="/genres"
+                className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
+              >
+                Genres
               </a>
               <a
                 href="/myanimelist"
