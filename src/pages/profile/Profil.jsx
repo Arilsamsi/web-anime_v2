@@ -1,89 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, LogOut } from "lucide-react"; // Icon user dan logout
-import { useGoogleLogin } from "@react-oauth/google";
+import { User, LogOut } from "lucide-react";
 
-function Profile() {
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
-  );
+const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (accessToken) {
-      // Fetch user profile data
+    const token = localStorage.getItem("accessToken");
+    if (token) {
       fetch("https://www.googleapis.com/oauth2/v1/userinfo?alt=json", {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       })
         .then((res) => res.json())
         .then((data) => setUserInfo(data))
         .catch((err) => console.error("Error fetching user data:", err));
     } else {
-      navigate("/"); // Redirect to homepage if not logged in
+      navigate("/login");
     }
-  }, [accessToken, navigate]);
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    setAccessToken(null);
-    navigate("/"); // Redirect to homepage after logout
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground py-8 pt-[100px]">
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-        <div className="flex items-center space-x-6 mb-6">
-          {/* User Avatar and Information */}
-          <div className="w-24 h-24 rounded-full overflow-hidden">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
+      <div className="bg-white dark:bg-gray-800 w-full max-w-lg p-8 rounded-lg shadow-lg border-2 border-gray-200 dark:border-gray-700">
+        {userInfo ? (
+          <div className="text-center">
             <img
-              src={userInfo?.picture || "/default-avatar.png"}
-              alt="User Avatar"
-              className="w-full h-full object-cover"
+              src={userInfo.picture}
+              alt="Profile"
+              className="w-32 h-32 mx-auto rounded-full border-4 border-gray-300 dark:border-gray-600 mb-6 shadow-md"
             />
-          </div>
-          <div>
-            <h2 className="text-black text-2xl font-semibold">
-              {userInfo?.name}
+            <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-2 tracking-wide">
+              {userInfo.name}
             </h2>
-            <p className="text-gray-500">{userInfo?.email}</p>
+            <p className="text-xl text-gray-600 dark:text-gray-200 mb-4">
+              {userInfo.email}
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={handleLogout}
+                className="flex items-center justify-center bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-all transform duration-300 ease-in-out"
+              >
+                <LogOut className="w-5 h-5 mr-2" />
+                Logout
+              </button>
+              <button
+                onClick={() => navigate("/")}
+                className="flex items-center justify-center bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all transform duration-300 ease-in-out"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Back to Home
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Profile Details Card */}
-        <div className="text-black p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Profile Details</h3>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-medium">Full Name:</h4>
-              <p>{userInfo?.name || "N/A"}</p>
-            </div>
-            <div>
-              <h4 className="font-medium">Email:</h4>
-              <p>{userInfo?.email || "N/A"}</p>
-            </div>
-            <div>
-              <h4 className="font-medium">Location:</h4>
-              <p>{userInfo?.locale || "N/A"}</p>
-            </div>
+        ) : (
+          <div className="text-center text-white">
+            <p>Loading...</p>
           </div>
-        </div>
-
-        {/* Logout Button */}
-        <div className="mt-6 text-center">
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-6 py-2 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
-          >
-            <LogOut className="mr-2" />
-            Logout
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Profile;
