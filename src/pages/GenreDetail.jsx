@@ -13,9 +13,8 @@ const GenreDetail = () => {
     fetch(`https://wajik-anime-api.vercel.app/samehadaku/genres/${genreId}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("API Response:", data); // Debugging
         setAnimeList(data.data.animeList || []);
-        setGenreList(data.data.animeList?.[0]?.genreList || []);
+        // setGenreList(data.data.animeList?.[0]?.genreList || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -28,13 +27,11 @@ const GenreDetail = () => {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   const renderStars = (score) => {
-    // console.log("Score:", score); // Debugging untuk melihat data
-
     if (!score)
       return <span className="text-gray-400 text-sm">No rating available</span>;
 
     const maxStars = 5;
-    const normalizedScore = Math.round((parseFloat(score) / 10) * maxStars); // Konversi dari skala 10 ke 5
+    const normalizedScore = Math.round((parseFloat(score) / 10) * maxStars);
 
     return (
       <div className="flex items-center">
@@ -55,20 +52,22 @@ const GenreDetail = () => {
   return (
     <div className="w-full mx-auto p-6 bg-background text-foreground pt-[80px]">
       <div className="flex items-center justify-stretch mb-6">
-        <a href="/genres">
+        <a href="/genres" className="hover:text-gray-500 transition">
           <ArrowLeft />
         </a>
         <h1 className="text-3xl font-bold">{genreId.toUpperCase()} Anime</h1>
       </div>
 
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">Genres:</h2>
+        <h2 className="text-2xl font-semibold mb-2">
+          List anime genre: {genreId.toUpperCase()}
+        </h2>
         <div className="flex flex-wrap gap-2">
           {/* {genreList.map(({ genreId, title }) => (
             <Link
               key={genreId}
               to={`/genres/${genreId}`}
-              className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
             >
               {title}
             </Link>
@@ -82,7 +81,7 @@ const GenreDetail = () => {
             <Link
               key={animeId}
               to={`/anime/${animeId}`}
-              className="block bg-background rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
+              className="block bg-background rounded-lg overflow-hidden shadow-md hover:shadow-lg transition transform hover:scale-105"
             >
               <img
                 src={poster}
@@ -99,7 +98,7 @@ const GenreDetail = () => {
                   {genreList.map(({ genreId, title }) => (
                     <span
                       key={genreId}
-                      className="bg-red-500 text-white px-2 py-1 text-xs rounded-lg"
+                      className="bg-red-500 text-white px-2 py-1 text-xs rounded-lg hover:bg-red-600 transition"
                     >
                       {title}
                     </span>

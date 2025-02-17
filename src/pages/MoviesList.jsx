@@ -12,6 +12,8 @@ const MoviesList = () => {
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.data.animeList || []);
+        // console.log(data.data.animeList);
+
         setLoading(false);
       })
       .catch((err) => {
@@ -56,36 +58,41 @@ const MoviesList = () => {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {movies.map(({ animeId, title, poster, score, status, genreList }) => (
-          <Link
-            key={animeId}
-            to={`/anime/${animeId}`}
-            className="block bg-background rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
-          >
-            <img
-              src={poster}
-              alt={title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-3">
-              <h3 className="text-lg font-bold text-foreground truncate">
-                {title}
-              </h3>
-              {renderStars(score)}
-              <p className="text-gray-400 text-sm">Status: {status}</p>
-              <div className="flex flex-wrap gap-1 mt-2">
-                {genreList.map(({ genreId, title }) => (
-                  <span
-                    key={genreId}
-                    className="bg-red-500 text-white px-2 py-1 text-xs rounded-lg"
-                  >
-                    {title}
-                  </span>
-                ))}
+        {movies.map(
+          ({ animeId, title, poster, score, status, genreList, type }) => (
+            <Link
+              key={animeId}
+              to={`/anime/${animeId}`}
+              className="block bg-background rounded-lg overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <div className="relative">
+                <img
+                  src={poster}
+                  alt={title}
+                  className="w-full h-48 object-cover transition-opacity duration-300 hover:opacity-80"
+                />
               </div>
-            </div>
-          </Link>
-        ))}
+              <div className="p-3">
+                <h3 className="text-lg font-bold text-foreground truncate">
+                  {title}
+                </h3>
+                {renderStars(score)}
+                {/* <p>Type: {type}</p> */}
+                <p className="text-gray-400 text-sm">Status: {status}</p>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {genreList.map(({ genreId, title }) => (
+                    <span
+                      key={genreId}
+                      className="bg-red-500 text-white px-2 py-1 text-xs rounded-lg"
+                    >
+                      {title}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          )
+        )}
       </div>
     </div>
   );

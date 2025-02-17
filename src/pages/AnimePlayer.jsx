@@ -8,18 +8,6 @@ const AnimePlayer = () => {
   const [episodeData, setEpisodeData] = useState(null);
   const [selectedServerId, setSelectedServerId] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
-  const [theme, setTheme] = useState("light");
-
-  // Ambil tema dari preferensi pengguna
-  useEffect(() => {
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(isDark ? "dark" : "light");
-  }, []);
-
-  // Terapkan tema ke halaman
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
 
   useEffect(() => {
     const fetchEpisode = async () => {

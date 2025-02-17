@@ -45,13 +45,13 @@ const GenreList = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">
                 {letter}
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {groupedGenres[letter].map(({ genreId, title }) =>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2">
+                {groupedGenres[letter].map(({ genreId, title, total }) =>
                   genreId ? (
                     <Link
                       key={genreId}
                       to={`/genres/${genreId}`}
-                      className="bg-red-500 hover:bg-red-600 text-white font-semibold p-3 rounded-lg shadow-md text-center transition-transform transform hover:scale-105"
+                      className="bg-red-500 hover:bg-red-600 text-white font-semibold p-2 rounded-lg shadow-md text-center transition-transform transform hover:scale-105"
                     >
                       {title}
                     </Link>

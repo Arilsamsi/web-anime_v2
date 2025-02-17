@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, PlayCircle } from "lucide-react";
+import { Star, PlayCircle, Clapperboard, PlaySquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const getRankStyle = (rank) => {
@@ -48,7 +48,7 @@ export function AnimeCard({
 
         {/* Menampilkan Episode (tanpa ReleasedOn jika Popular) */}
         <div className="flex items-center gap-1 text-sm">
-          <PlayCircle className="w-4 h-4 text-gray-400" />
+          <PlaySquare className="w-4 h-4 text-gray-400" />
           <span>{episodes} Episodes</span>
         </div>
 

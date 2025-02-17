@@ -7,21 +7,8 @@ const SearchResult = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query");
-
-  const [theme, setTheme] = useState("light");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Ambil tema dari preferensi pengguna
-  useEffect(() => {
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(isDark ? "dark" : "light");
-  }, []);
-
-  // Terapkan tema ke halaman
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
 
   // Fetch data anime berdasarkan query pencarian
   useEffect(() => {

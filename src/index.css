@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 255 100% 100%; /* Putih sepenuhnya */
     --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
+    --card: 255 100% 100%; /* Warna putih */
     --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
+    --popover: 255 100% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 346.8 77.2% 49.8%;
     --primary-foreground: 355.7 100% 97.3%;
@@ -24,8 +24,9 @@
     --radius: 0.5rem;
   }
 
+  /* Tema Dark Mode */
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222.2 84% 4.9%; /* Gelap */
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -51,7 +52,7 @@
   }
 
   .anime-card::before {
-    content: '';
+    content: "";
     @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300;
   }
 
@@ -80,7 +81,7 @@
   }
 
   .nav-link::after {
-    content: '';
+    content: "";
     @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 -translate-x-1/2;
   }
 
@@ -111,5 +112,26 @@
 
   .animate-fade-in-up {
     animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  /* Custom Scrollbar */
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(239, 68, 68, 0.5);
+    border-radius: 5px;
+  }
+
+  .scrollbar-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-body::-webkit-scrollbar-thumb {
+    background: rgba(239, 68, 68, 0.5);
+    border-radius: 5px;
+  }
+
+  .placeholder-black::placeholder {
+    color: #000;
   }
 }
