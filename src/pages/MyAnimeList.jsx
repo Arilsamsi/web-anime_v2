@@ -8,6 +8,7 @@ import {
   CircleEllipsis,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyAnimeList = () => {
   const [favoriteAnime, setFavoriteAnime] = useState([]);
@@ -91,6 +92,9 @@ const MyAnimeList = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground px-4 py-10 pt-[80px]">
+      <Helmet>
+        <title>AnimeStrim | My Anime List</title>
+      </Helmet>
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">My Anime List</h1>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Star } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
@@ -50,6 +51,9 @@ const MoviesList = () => {
 
   return (
     <div className="w-full mx-auto p-6 bg-background text-foreground pt-[80px]">
+      <Helmet>
+        <title>AnimeStrim | Movies</title>
+      </Helmet>
       <div className="flex items-center justify-stretch mb-6">
         <a href="/">
           <ArrowLeft />

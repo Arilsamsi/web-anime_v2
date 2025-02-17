@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const AnimePlayer = () => {
   const { episodeId } = useParams();
@@ -80,6 +81,9 @@ const AnimePlayer = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 pt-[85px]">
+      <Helmet>
+        <title>AnimeStrim | Anime Player</title>
+      </Helmet>
       <div className="mx-auto">
         <button
           onClick={() => navigate(-1)}

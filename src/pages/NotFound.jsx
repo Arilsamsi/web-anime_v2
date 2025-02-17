@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export default function NotFound() {
   const [bgImage, setBgImage] = useState("/404.gif");
@@ -10,6 +11,9 @@ export default function NotFound() {
       className="relative flex flex-col items-center justify-center h-screen w-full bg-cover bg-center"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <Helmet>
+        <title>AnimeStrim | 404</title>
+      </Helmet>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 

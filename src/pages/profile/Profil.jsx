@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User, LogOut } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -29,6 +30,9 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
+      <Helmet>
+        <title>AnimeStrim | Profil</title>
+      </Helmet>
       <div className="bg-white dark:bg-gray-800 w-full max-w-lg p-8 rounded-lg shadow-lg border-2 border-gray-200 dark:border-gray-700">
         {userInfo ? (
           <div className="text-center">

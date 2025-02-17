@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   Star,
   Clock,
@@ -67,6 +68,9 @@ const AnimeDetail = () => {
 
   return (
     <div className="min-h-screen transition-colors bg-background text-foreground pt-[80px]">
+      <Helmet>
+        <title>AnimeStrim | Anime Detail</title>
+      </Helmet>
       <div className="relative h-[70vh] md:h-[60vh] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center blur-xl"

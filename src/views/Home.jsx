@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AnimeCard } from "../components/AnimeCard";
 import { Clock, Star, CalendarClock, History, Trash } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const API_URLS = {
   recent: "https://wajik-anime-api.vercel.app/samehadaku/recent",
@@ -90,6 +91,9 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-y-auto scrollbar-body">
+      <Helmet>
+        <title>AnimeStrim | Home</title>
+      </Helmet>
       {/* Hero Section */}
       <div className="relative h-[70vh]">
         <div

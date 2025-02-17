@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
 // import Header from "../components/Header";
 
@@ -41,6 +42,9 @@ const SearchResult = () => {
     <div
       className={`min-h-screen bg-background text-foreground transition-colors duration-300 pt-[10px]`}
     >
+      <Helmet>
+        <title>AnimeStrim | Search Result</title>
+      </Helmet>
       {/* <Header /> */}
       <div className="container mx-auto px-4 py-6 pt-[70px]">
         <h2 className="text-2xl font-bold mb-4 text-center">

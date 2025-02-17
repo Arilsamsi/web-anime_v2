@@ -1,5 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const GenreList = () => {
@@ -50,6 +51,9 @@ const GenreList = () => {
 
   return (
     <div className="w-full mx-auto p-6 bg-background text-foreground pt-[80px]">
+      <Helmet>
+        <title>AnimeStrim | Genre</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-center mb-6">Anime Genres</h1>
       <div className="space-y-6">
         {lettersToShow.map((letter) => (
