@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+
+module.exports = {
+  content: [
+    "./index.html", // Ini *harus* ada
+    "./src/**/*.{js,ts,jsx,tsx}", // Ini yang *paling penting* - pastikan *path* nya benar
+  ],
   darkMode: "class",
   theme: {
     container: {
@@ -49,5 +53,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [],
 };
