@@ -136,52 +136,50 @@ const AnimePlayer = () => {
 
         {/* Download Section (Grid with Dropdown) */}
         {downloadData && (
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-2">Download Episode:</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="w-full mt-6">
+            <h3 className="text-2xl font-semibold mb-4 text-gray-300">
+              Download Episode:
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {downloadData.formats
-                .filter((format) => format.title.toLowerCase() === "mp4") // Menyaring hanya format MP4
+                .filter((format) =>
+                  [
+                    "360p",
+                    "480p",
+                    "720p",
+                    "1080p",
+                    "MP4",
+                    "MP4HD",
+                    "FULLHD",
+                    "x265",
+                    "MKV",
+                  ].some((quality) =>
+                    format.title.toLowerCase().includes(quality.toLowerCase())
+                  )
+                )
                 .map((format) => (
                   <div
                     key={format.title}
-                    className="bg-gray-800 p-4 rounded-lg shadow-md transition-all relative"
+                    className="bg-gray-800 p-6 rounded-lg shadow-md transition-all hover:shadow-lg"
                   >
-                    <h4 className="text-lg text-gray-300 mb-2">
+                    <h4 className="text-xl text-gray-300 mb-4">
                       {format.title}
                     </h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="space-y-4">
                       {format.qualities.map((quality) => (
-                        <div key={quality.title} className="relative">
-                          <button
-                            onClick={() => toggleDropdown(quality.title)}
-                            className="text-gray-300 hover:text-white w-full flex justify-between items-center bg-gray-700 p-2 px-2 rounded-lg transition-all z-40"
-                          >
-                            <span>{quality.title}</span>
-                            <span
-                              className={`transform transition-transform ${
-                                activeDropdown === quality.title
-                                  ? "rotate-180"
-                                  : "rotate-0"
-                              }`}
-                            >
-                              ▼
+                        <div key={quality.title} className="space-y-2">
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <span className="font-semibold">
+                              {quality.title}:
                             </span>
-                          </button>
-
-                          {/* Dropdown for download links */}
-                          <div
-                            className={`absolute left-0 mt-2 w-full bg-gray-900 shadow-lg rounded-lg p-4 transition-all duration-300 ease-in-out transform overflow-y-auto ${
-                              activeDropdown === quality.title
-                                ? "opacity-100 translate-y-0 max-h-60"
-                                : "opacity-0 translate-y-4 max-h-0"
-                            }`}
-                          >
+                          </div>
+                          <div className="flex flex-wrap gap-2">
                             {quality.urls.map((url, index) => (
                               <a
                                 key={index}
                                 href={url.url}
                                 download
-                                className="block bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded mt-2 transition-all duration-300"
+                                className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-all duration-300 text-sm font-medium w-auto"
                               >
                                 {url.title}
                               </a>

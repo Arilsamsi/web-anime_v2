@@ -184,8 +184,8 @@ const AnimeDetail = () => {
 
       {/* Poster PopUp Modal */}
       {showPosterModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 px-5">
-          <div className="relative max-w-4xl w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 px-5 transition-opacity duration-300 animate-fadeIn">
+          <div className="relative max-w-4xl w-full transform scale-95 transition-transform duration-300 ease-out animate-scaleUp">
             <button
               className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
               onClick={() => setShowPosterModal(false)}
@@ -195,7 +195,7 @@ const AnimeDetail = () => {
             <img
               src={anime.poster}
               alt={anime.title}
-              className="w-full max-h-[90vh] rounded-lg shadow-2xl object-contain"
+              className="w-full max-h-[90vh] rounded-lg shadow-2xl object-contain transition-transform duration-300 ease-out"
             />
           </div>
         </div>
