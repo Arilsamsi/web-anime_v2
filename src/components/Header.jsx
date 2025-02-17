@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, User } from "lucide-react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Header() {
   const [theme, setTheme] = useState("light");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +35,34 @@ function Header() {
     }
   };
 
+  const handleLoginSuccess = (response) => {
+    const token = response.access_token;
+    setAccessToken(token);
+    localStorage.setItem("accessToken", token);
+
+    fetch("https://www.googleapis.com/oauth2/v1/userinfo?alt=json", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data))
+      .catch((err) => console.error("Error fetching user data:", err));
+  };
+
+  const handleLoginError = (error) => {
+    console.error("Login Failed", error);
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: handleLoginSuccess,
+    onError: handleLoginError,
+  });
+
+  const goToProfile = () => {
+    navigate("/profil");
+  };
+
   return (
     <div>
       <nav className="fixed h-20 w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
@@ -37,7 +70,6 @@ function Header() {
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <a href="/">
-                {/* <h1 className="text-2xl font-bold text-primary">AnimePlay</h1> */}
                 <img className="w-[65px] h-[65px]" src="/logo.png" alt="" />
               </a>
             </div>
@@ -63,11 +95,19 @@ function Header() {
                 <Search />
               </button>
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              {/* <a href="/login">
-                <div className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white">
+              {/* Tampilkan tombol login atau ikon profil */}
+              {accessToken ? (
+                <button onClick={goToProfile} className="flex items-center">
+                  <User className="w-6 h-6" />
+                </button>
+              ) : (
+                <button
+                  onClick={login}
+                  className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white"
+                >
                   Login
-                </div>
-              </a> */}
+                </button>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -87,16 +127,23 @@ function Header() {
                 )}
               </button>
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              {/* <a href="/login">
-                <div className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white">
-                  Login
-                </div>
-              </a> */}
+              <div>
+                {accessToken ? (
+                  <button onClick={goToProfile} className="flex items-center">
+                    <User className="w-6 h-6" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={login}
+                    className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white"
+                  >
+                    Login
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-lg">
             <div className="text-center py-4 space-y-2">
@@ -129,7 +176,6 @@ function Header() {
         )}
       </nav>
 
-      {/* Search Input */}
       {isSearchOpen && (
         <div className="fixed top-20 left-0 w-full bg-black/50 backdrop-blur-md p-4 flex justify-center z-50">
           <input

@@ -8,6 +8,7 @@ import MyAnimeList from "../pages/MyAnimeList";
 import GenreList from "../pages/GenreList";
 import GenreDetail from "../pages/GenreDetail";
 import MoviesList from "../pages/MoviesList";
+import Profile from "../pages/profile/Profil";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/genres" element={<GenreList />} />
       <Route path="/genres/:genreId" element={<GenreDetail />} />
       <Route path="/movies" element={<MoviesList />} />
+      <Route path="/profil" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
