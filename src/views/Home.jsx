@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AnimeCard } from "../components/AnimeCard";
-import { Clock, Star, CalendarClock, Moon, Sun } from "lucide-react";
+import { Clock, Star, CalendarClock, History, Trash } from "lucide-react";
 
 const API_URLS = {
   recent: "https://wajik-anime-api.vercel.app/samehadaku/recent",
@@ -9,25 +9,30 @@ const API_URLS = {
 };
 
 function Home() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || null;
-  });
+  // const [theme, setTheme] = useState(() => {
+  //   return localStorage.getItem("theme") || null;
+  // });
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("recent");
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [history, setHistory] = useState([]);
 
-  // Tambahkan atau hapus class "dark" di <html>
   useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+    setHistory(storedHistory);
+  }, []);
+
+  // useEffect(() => {
+  //   if (theme === "dark") {
+  //     document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
 
   useEffect(() => {
     if (animeList.length > 0) {
@@ -77,6 +82,12 @@ function Home() {
     anime.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Fungsi untuk menghapus seluruh history
+  const handleClearHistory = () => {
+    localStorage.removeItem("history");
+    setHistory([]);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-y-auto scrollbar-body">
       {/* Hero Section */}
@@ -97,13 +108,6 @@ function Home() {
             <p className="text-lg md:text-xl mb-8 text-white/90">
               Jelajahi serial anime dan film terbaik, semuanya di satu tempat.
             </p>
-            {/* <input
-              type="text"
-              placeholder="Search anime..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value || "")}
-              className="px-4 py-2 border rounded-lg text-black w-[300px]"
-            /> */}
           </div>
         </div>
       </div>
@@ -144,14 +148,63 @@ function Home() {
             <Star className="w-4 h-4" />
             <span>Popular</span>
           </button>
+          <button
+            onClick={() => setActiveTab("history")}
+            className={`flex items-center space-x-2 px-2 rounded-full transition-colors ${
+              activeTab === "history"
+                ? "bg-primary text-white"
+                : "hover:bg-accent"
+            }`}
+          >
+            <History className="w-4 h-4" />
+            <span>History</span>
+          </button>
         </div>
 
+        {/* History Tab */}
+        {activeTab === "history" && (
+          <div className="space-y-4">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold">Your History</h2>
+              <button
+                onClick={handleClearHistory}
+                className="flex items-center space-x-2 text-red-500 hover:text-red-700 transition-colors"
+              >
+                <Trash className="w-5 h-5" />
+                <span>Clear History</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {history.length > 0 ? (
+                history.map((episode, index) => (
+                  <AnimeCard
+                    key={index}
+                    title={episode.title}
+                    poster={episode.poster || "defaultPosterURL.jpg"}
+                    episodes={episode.episodes}
+                    score={episode.score}
+                    episodeId={episode.episodeId}
+                    isHistory={true}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-400 col-span-full">
+                  No history available.
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Anime List */}
-        {loading ? (
-          <div className="text-center text-lg font-semibold">Loading...</div>
-        ) : (
+        {activeTab !== "history" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredAnime.length > 0 ? (
+            {loading ? (
+              <div className="text-center text-lg font-semibold">
+                Loading...
+              </div>
+            ) : filteredAnime.length > 0 ? (
               filteredAnime.map((anime, index) => (
                 <AnimeCard key={index} {...anime} />
               ))

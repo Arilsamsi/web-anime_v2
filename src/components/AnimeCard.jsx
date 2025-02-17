@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, PlayCircle, Clapperboard, PlaySquare } from "lucide-react";
+import { Star, PlaySquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const getRankStyle = (rank) => {
@@ -17,12 +17,26 @@ export function AnimeCard({
   rank,
   isPopular,
   animeId,
+  episodeId,
+  isHistory = false,
 }) {
   const navigate = useNavigate();
 
+  // console.log("AnimeCard Props:", { title, episodeId });
+
   const handleWatchNow = () => {
-    navigate(`/anime/${animeId}`); // Navigasi ke halaman detail anime
+    navigate(`/anime/${animeId}`);
   };
+
+  const handleContinueWatch = () => {
+    if (!episodeId) {
+      alert("Episode terakhir tidak ditemukan!");
+      return;
+    }
+    navigate(`/watch/${episodeId}`);
+  };
+
+  // console.log("AnimeCard Data:", { title, episodeId, isHistory });
 
   return (
     <div className="anime-card group relative">
@@ -46,7 +60,7 @@ export function AnimeCard({
       <div className="anime-card-content text-white p-4 rounded-b-lg">
         <h3 className="text-lg font-bold mb-2">{title}</h3>
 
-        {/* Menampilkan Episode (tanpa ReleasedOn jika Popular) */}
+        {/* Menampilkan Episode */}
         <div className="flex items-center gap-1 text-sm">
           <PlaySquare className="w-4 h-4 text-gray-400" />
           <span>{episodes} Episodes</span>
@@ -61,10 +75,21 @@ export function AnimeCard({
         )}
 
         <button
-          className="mt-3 w-full py-2 bg-primary/90 hover:bg-primary text-white rounded-md transition-all"
-          onClick={handleWatchNow}
+          className={`mt-3 w-full py-2 rounded-md transition-all ${
+            isHistory
+              ? episodeId
+                ? "bg-primary/90 hover:bg-primary text-white"
+                : "bg-gray-500 cursor-not-allowed"
+              : "bg-primary/90 hover:bg-primary text-white"
+          }`}
+          onClick={isHistory ? handleContinueWatch : handleWatchNow}
+          disabled={isHistory && !episodeId} // Disable jika episodeId kosong
         >
-          Watch Now
+          {isHistory
+            ? episodeId
+              ? "Continue Watching"
+              : "No Episode Found"
+            : "Watch Now"}
         </button>
       </div>
     </div>

@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: [
-    "./index.html", // Ini *harus* ada
-    "./src/**/*.{js,ts,jsx,tsx}", // Ini yang *paling penting* - pastikan *path* nya benar
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     container: {

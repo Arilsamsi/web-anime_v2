@@ -8,8 +8,20 @@ const AnimePlayer = () => {
   const [episodeData, setEpisodeData] = useState(null);
   const [selectedServerId, setSelectedServerId] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [history, setHistory] = useState([]);
 
+  // Simpan episode yang sedang diputar ke localStorage
   useEffect(() => {
+    const saveToHistory = (episode) => {
+      const history = JSON.parse(localStorage.getItem("history")) || [];
+      const newHistory = [
+        { episodeId, title: episode.title, poster: episode.poster },
+        ...history.filter((item) => item.episodeId !== episodeId), // Perbaikan disini
+      ];
+      localStorage.setItem("history", JSON.stringify(newHistory));
+      setHistory(newHistory);
+    };
+
     const fetchEpisode = async () => {
       try {
         const response = await fetch(
@@ -19,6 +31,8 @@ const AnimePlayer = () => {
 
         if (data?.data?.server?.qualities) {
           setEpisodeData(data.data);
+          saveToHistory(data.data);
+          // console.log(data.data);
         } else {
           console.error("Server tidak ditemukan.");
         }
@@ -52,6 +66,11 @@ const AnimePlayer = () => {
 
     fetchVideoUrl();
   }, [selectedServerId]);
+
+  // const handleClearHistory = () => {
+  //   localStorage.removeItem("history");
+  //   setHistory([]);
+  // };
 
   return (
     <div className={`min-h-screen bg-background text-foreground p-6 pt-[85px]`}>
@@ -131,6 +150,28 @@ const AnimePlayer = () => {
             </button>
           )}
         </div>
+
+        {/* <div className="mt-8">
+          <h3 className="text-xl font-bold mb-2">History</h3>
+          <button
+            onClick={handleClearHistory}
+            className="py-2 px-4 bg-red-600 text-white rounded mb-4"
+          >
+            Clear History
+          </button>
+          <div>
+            {history.length > 0 ? (
+              history.map((episode, index) => (
+                <div key={index} className="p-4 bg-gray-800 rounded-lg mb-4">
+                  <p className="text-white">{episode.title}</p>
+                  <p className="text-gray-400">{episode.episodeId}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-400">No history available.</p>
+            )}
+          </div>
+        </div> */}
       </div>
     </div>
   );

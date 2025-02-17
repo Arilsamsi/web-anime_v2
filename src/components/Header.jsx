@@ -33,7 +33,7 @@ function Header() {
   return (
     <div>
       <nav className="fixed h-20 w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
-        <div className="container">
+        <div className="px-4">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center">
               <a href="/">
@@ -56,15 +56,25 @@ function Header() {
               <a href="/myanimelist" className="nav-link">
                 My List
               </a>
-              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="mr-1"
+              >
                 <Search />
               </button>
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              {/* <a href="/login">
+                <div className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white">
+                  Login
+                </div>
+              </a> */}
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
-              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
+                <Search />
+              </button>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="ml-2 p-2 rounded-md hover:bg-accent transition-colors"
@@ -76,9 +86,12 @@ function Header() {
                   <Menu className="w-6 h-6" />
                 )}
               </button>
-              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
-                <Search />
-              </button>
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+              {/* <a href="/login">
+                <div className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white">
+                  Login
+                </div>
+              </a> */}
             </div>
           </div>
         </div>
