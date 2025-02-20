@@ -57,13 +57,13 @@ function Home() {
           let animeData = result.data.animeList;
 
           if (activeTab === "popular") {
-            animeData = animeData.slice(0, 10).map((anime, index) => ({
+            animeData = animeData.slice(0, 20).map((anime, index) => ({
               ...anime,
               rank: index + 1,
               isPopular: true,
             }));
           } else {
-            animeData = animeData.slice(0, 12);
+            animeData = animeData.slice(0, 20);
           }
 
           setAnimeList(animeData);

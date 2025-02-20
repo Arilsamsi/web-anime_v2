@@ -20,6 +20,11 @@ const AnimeDetail = () => {
   const [showFullSynopsis, setShowFullSynopsis] = useState(false);
   const [favoriteAnime, setFavoriteAnime] = useState([]);
   const [showPosterModal, setShowPosterModal] = useState(false);
+  // const { title } = useParams();
+
+  // useEffect(() => {
+  //   document.title = `AnimeStrim | ${title}`;
+  // }, [title]);
 
   useEffect(() => {
     const fetchAnimeDetail = async () => {
@@ -29,6 +34,7 @@ const AnimeDetail = () => {
         );
         const data = await response.json();
         setAnime(data.data);
+        // console.log(data.data);
       } catch (error) {
         console.error("Error fetching anime details:", error);
       }
