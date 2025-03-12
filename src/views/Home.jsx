@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { AnimeCard } from "../components/AnimeCard";
-import { Clock, Star, CalendarClock, History, Trash } from "lucide-react";
+import {
+  Clock,
+  Star,
+  CalendarClock,
+  History,
+  Trash,
+  CheckCircle,
+  Clapperboard,
+  CheckCircle2,
+} from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 const API_URLS = {
   recent: "https://wajik-anime-api.vercel.app/samehadaku/recent",
   ongoing: "https://wajik-anime-api.vercel.app/samehadaku/ongoing",
   popular: "https://wajik-anime-api.vercel.app/samehadaku/popular",
+  completed: "https://wajik-anime-api.vercel.app/samehadaku/completed",
+  movies: "https://wajik-anime-api.vercel.app/samehadaku/movies",
 };
 
 function Home() {
@@ -85,8 +96,12 @@ function Home() {
 
   // Fungsi untuk menghapus seluruh history
   const handleClearHistory = () => {
-    localStorage.removeItem("history");
-    setHistory([]);
+    const isConfirmed = confirm("Are you sure you want to clear history?");
+
+    if (isConfirmed) {
+      localStorage.removeItem("history");
+      setHistory([]);
+    }
   };
 
   return (
@@ -151,6 +166,28 @@ function Home() {
           >
             <Star className="w-4 h-4" />
             <span>Popular</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("completed")}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-colors ${
+              activeTab === "completed"
+                ? "bg-primary text-white"
+                : "hover:bg-accent"
+            }`}
+          >
+            <CheckCircle2 className="w-4 h-4" />
+            <span>Completed</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("movies")}
+            className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-colors ${
+              activeTab === "movies"
+                ? "bg-primary text-white"
+                : "hover:bg-accent"
+            }`}
+          >
+            <Clapperboard className="w-4 h-4" />
+            <span>Movies</span>
           </button>
           <button
             onClick={() => setActiveTab("history")}

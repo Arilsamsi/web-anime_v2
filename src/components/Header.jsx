@@ -79,8 +79,11 @@ function Header() {
               <a href="/" className="nav-link">
                 Home
               </a>
-              <a href="/movies" className="nav-link">
+              {/* <a href="/movies" className="nav-link">
                 Movies
+              </a> */}
+              <a href="/jadwal-rilis" className="nav-link">
+                Jadwal Liris
               </a>
               <a href="/genres" className="nav-link">
                 Genres
@@ -153,11 +156,17 @@ function Header() {
               >
                 Home
               </a>
-              <a
+              {/* <a
                 href="/movies"
                 className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
               >
                 Movies
+              </a> */}
+              <a
+                href="/jadwal-rilis"
+                className="block py-2 text-lg text-foreground hover:text-primary transition-colors"
+              >
+                Jadwal Rilis
               </a>
               <a
                 href="/genres"

@@ -171,7 +171,7 @@ const AnimeDetail = () => {
       </div>
 
       <div className="mx-auto px-5 py-8">
-        <div className="flex items-center justify-stretch mb-6">
+        <div className="flex items-center justify-evenly mb-6">
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
             <Play className="text-red-500" /> Episodes
           </h2>

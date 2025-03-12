@@ -9,6 +9,7 @@ import GenreList from "../pages/GenreList";
 import GenreDetail from "../pages/GenreDetail";
 import MoviesList from "../pages/MoviesList";
 import Profile from "../pages/profile/Profil";
+import JadwalRilis from "../pages/JadwalRilis";
 
 const AppRoutes = () => {
   return (
@@ -20,9 +21,10 @@ const AppRoutes = () => {
       <Route path="/myanimelist" element={<MyAnimeList />} />
       <Route path="/genres" element={<GenreList />} />
       <Route path="/genres/:genreId" element={<GenreDetail />} />
-      <Route path="/movies" element={<MoviesList />} />
+      {/* <Route path="/movies" element={<MoviesList />} /> */}
       <Route path="/profil" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="jadwal-rilis" element={<JadwalRilis />} />
     </Routes>
   );
 };

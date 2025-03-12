@@ -83,13 +83,9 @@ export function AnimeCard({
               : "bg-primary/90 hover:bg-primary text-white"
           }`}
           onClick={isHistory ? handleContinueWatch : handleWatchNow}
-          disabled={isHistory && !episodeId} // Disable jika episodeId kosong
+          disabled={isHistory && !episodeId}
         >
-          {isHistory
-            ? episodeId
-              ? "Continue Watching"
-              : "No Episode Found"
-            : "Watch Now"}
+          {isHistory ? (episodeId ? "Continue" : "No Episode Found") : "Play"}
         </button>
       </div>
     </div>
