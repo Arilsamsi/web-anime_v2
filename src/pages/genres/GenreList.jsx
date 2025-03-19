@@ -52,7 +52,7 @@ const GenreList = () => {
   return (
     <div className="w-full mx-auto p-6 bg-background text-foreground pt-[80px]">
       <Helmet>
-        <title>AnimeStrim | Genre</title>
+        <title>Genre | AnimeStrim</title>
       </Helmet>
       <h1 className="text-3xl font-bold text-center mb-6">Anime Genres</h1>
       <div className="space-y-6">

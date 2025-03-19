@@ -70,7 +70,7 @@ const JadwalRilis = () => {
   return (
     <div className="pt-[80px] mx-auto p-4 text-foreground bg-background min-h-screen min-w-full">
       <Helmet>
-        <title>AnimeStrim | Jadwal Rilis</title>
+        <title>Jadwal Rilis | AnimeStrim</title>
       </Helmet>
       <h1 className="text-2xl font-bold mb-4">Jadwal Rilis</h1>
 

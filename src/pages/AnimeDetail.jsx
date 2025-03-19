@@ -75,7 +75,7 @@ const AnimeDetail = () => {
   return (
     <div className="min-h-screen transition-colors bg-background text-foreground pt-[80px]">
       <Helmet>
-        <title>AnimeStrim | Anime Detail</title>
+        <title>Anime Detail | AnimeStrim</title>
       </Helmet>
       <div className="relative h-[70vh] md:h-[60vh] overflow-hidden">
         <div

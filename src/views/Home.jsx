@@ -6,17 +6,14 @@ import {
   CalendarClock,
   History,
   Trash,
-  CheckCircle,
   Clapperboard,
   CheckCircle2,
   ChevronRightCircle,
   ChevronLeftCircle,
   XCircle,
-  MinusCircle,
-  CircleSlash,
+  Ban,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
-import { use } from "react";
 import { useNavigate } from "react-router-dom";
 
 const API_URLS = {
@@ -151,7 +148,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-y-auto scrollbar-body">
       <Helmet>
-        <title>AnimeStrim | Home</title>
+        <title>AnimeStrim | Streaming Dan Download Anime Sub Indo</title>
       </Helmet>
       {/* Hero Section */}
       <div className="relative h-[70vh]">
@@ -174,7 +171,6 @@ function Home() {
           </div>
         </div>
       </div>
-
       {/* Tabs */}
       <main className="container py-12">
         <div className="flex space-x-4 mb-8 overflow-x-auto pb-2 scrollbar">
@@ -301,6 +297,8 @@ function Home() {
           </div>
         )}
       </main>
+
+      {/* Batch Download List */}
       <div className="min-h-screen container px-5 bg-background text-foreground p-5">
         <h1 className="text-2xl bg-gray-900 p-3 font-bold text-white text-center mb-5">
           Download Batch Anime
@@ -309,22 +307,24 @@ function Home() {
         {error && <p className="text-center text-red-500">{error}</p>}
         {loading && <p className="text-center text-gray-500">Loading...</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {batchList.map((anime, index) => (
             <div
               key={index}
-              className="bg-background p-4 rounded-lg shadow-lg text-foreground hover:scale-105 transition-transform h-full flex flex-col"
+              className="bg-background p-4 rounded-xl shadow-xl text-foreground hover:scale-[1.03] transition-transform flex flex-col"
             >
               {/* Gambar */}
               <img
                 src={anime.poster}
                 alt={anime.title}
-                className="w-full h-40 object-cover rounded-md mb-3"
+                className="w-full aspect-[3/4] object-cover rounded-md mb-3"
               />
 
               {/* Konten utama */}
               <div className="flex-grow">
-                <h2 className="text-lg font-semibold mb-2">{anime.title}</h2>
+                <h1 className="text-sm md:text-lg font-semibold mb-2">
+                  {anime.title}
+                </h1>
 
                 {/* Genre List */}
                 <p className="text-sm text-gray-400 mb-2">
@@ -333,7 +333,7 @@ function Home() {
 
                 {/* Score & Status */}
                 <p className="text-sm text-gray-500">
-                  <strong>Score:</strong> {anime.score} |{" "}
+                  <strong>Score:</strong> {anime.score} <br />
                   <strong>Status:</strong> {anime.status}
                 </p>
               </div>
@@ -365,7 +365,7 @@ function Home() {
             } text-white`}
           >
             {!pagination.hasPrevPage ? (
-              <CircleSlash className="w-6 h-6" />
+              <Ban className="w-6 h-6" />
             ) : (
               <ChevronLeftCircle className="w-6 h-6" />
             )}
@@ -385,7 +385,7 @@ function Home() {
             } text-white`}
           >
             {!pagination.hasNextPage ? (
-              <CircleSlash className="w-6 h-6" />
+              <Ban className="w-6 h-6" />
             ) : (
               <ChevronRightCircle className="w-6 h-6" />
             )}

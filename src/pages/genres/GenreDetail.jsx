@@ -53,7 +53,7 @@ const GenreDetail = () => {
   return (
     <div className="w-full mx-auto p-6 bg-background text-foreground pt-[80px]">
       <Helmet>
-        <title>AnimeStrim | Genre Detail</title>
+        <title>Genre Detail | AnimeStrim</title>
       </Helmet>
       <div className="flex items-center justify-stretch mb-6">
         <a href="/genres" className="hover:text-gray-500 transition">

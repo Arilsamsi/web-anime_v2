@@ -5,12 +5,12 @@ import AnimePlayer from "../pages/AnimePlayer";
 import NotFound from "../pages/NotFound";
 import SearchResult from "../pages/SearchResult";
 import MyAnimeList from "../pages/MyAnimeList";
-import GenreList from "../pages/GenreList";
-import GenreDetail from "../pages/GenreDetail";
 import MoviesList from "../pages/MoviesList";
 import Profile from "../pages/profile/Profil";
 import JadwalRilis from "../pages/JadwalRilis";
 import BatchDownload from "../pages/BatchDownload";
+import GenreList from "../pages/genres/GenreList";
+import GenreDetail from "../pages/genres/GenreDetail";
 
 const AppRoutes = () => {
   return (

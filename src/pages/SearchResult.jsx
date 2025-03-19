@@ -43,7 +43,7 @@ const SearchResult = () => {
       className={`min-h-screen bg-background text-foreground transition-colors duration-300 pt-[10px]`}
     >
       <Helmet>
-        <title>AnimeStrim | Search Result</title>
+        <title>Result Search | AnimeStrim</title>
       </Helmet>
       {/* <Header /> */}
       <div className="container mx-auto px-4 py-6 pt-[70px]">

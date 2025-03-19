@@ -31,7 +31,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex justify-center items-center">
       <Helmet>
-        <title>AnimeStrim | Profil</title>
+        <title>Profil | AnimeStrim</title>
       </Helmet>
       <div className="bg-white dark:bg-gray-800 w-full max-w-lg p-8 rounded-lg shadow-lg border-2 border-gray-200 dark:border-gray-700">
         {userInfo ? (

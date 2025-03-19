@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 const BatchDownload = () => {
@@ -29,6 +30,9 @@ const BatchDownload = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white pt-20">
+      <Helmet>
+        <title>Batch Download | AnimeStrim</title>
+      </Helmet>
       {loading && <p className="text-center text-white">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
       {anime && (

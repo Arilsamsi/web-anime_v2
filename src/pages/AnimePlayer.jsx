@@ -82,7 +82,7 @@ const AnimePlayer = () => {
   return (
     <div className="min-h-screen bg-background text-foreground p-6 pt-[85px]">
       <Helmet>
-        <title>AnimeStrim | Anime Player</title>
+        <title>Anime Player | AnimeStrim</title>
       </Helmet>
       <div className="mx-auto">
         <button
