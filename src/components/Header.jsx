@@ -83,7 +83,7 @@ function Header() {
                 Movies
               </a> */}
               <a href="/jadwal-rilis" className="nav-link">
-                Jadwal Liris
+                Jadwal Rilis
               </a>
               <a href="/genres" className="nav-link">
                 Genres

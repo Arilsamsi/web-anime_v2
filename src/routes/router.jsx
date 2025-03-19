@@ -10,6 +10,7 @@ import GenreDetail from "../pages/GenreDetail";
 import MoviesList from "../pages/MoviesList";
 import Profile from "../pages/profile/Profil";
 import JadwalRilis from "../pages/JadwalRilis";
+import BatchDownload from "../pages/BatchDownload";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
       <Route path="/profil" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
       <Route path="jadwal-rilis" element={<JadwalRilis />} />
+      <Route path="/batch/:batchId" element={<BatchDownload />} />
     </Routes>
   );
 };
