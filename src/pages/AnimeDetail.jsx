@@ -204,42 +204,43 @@ const AnimeDetail = () => {
       </div>
       <div className="mx-auto px-5 py-8">
         <h1 className="w-full bg-gray-800 flex items-center p-5 font-bold text-2xl text-white rounded-lg">
-          Download Batch Anime: " {anime.english} "
+          Download Batch Anime: "{anime.english}"
         </h1>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {batchList.map((batch, index) => (
-            <div
-              key={index}
-              className="bg-background p-4 rounded-xl shadow-xl text-foreground hover:scale-[1.03] transition-transform flex flex-col"
-            >
-              {/* Gambar */}
-              <img
-                src={anime.poster}
-                alt={batch.title}
-                className="w-full aspect-[3/4] object-cover rounded-md mb-3"
-              />
 
-              {/* Konten utama */}
-              <div className="flex-grow">
-                <h1 className="text-sm md:text-lg font-semibold mb-2">
-                  {batch.title}
-                </h1>
-              </div>
-
-              {/* Tombol Download */}
-              <a
-                onClick={() => {
-                  navigate(`/batch/${batch.batchId}`);
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md block text-center mt-3 cursor-pointer"
-                target="_blank"
-                rel="noopener noreferrer"
+        {batchList.length === 0 ? (
+          <p className="text-center text-gray-400 mt-5">
+            Batch belum tersedia.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {batchList.map((batch, index) => (
+              <div
+                key={index}
+                className="bg-background p-4 rounded-xl shadow-xl text-foreground hover:scale-[1.03] transition-transform flex flex-col cursor-pointer"
+                onClick={() => navigate(`/batch/${batch.batchId}`)}
               >
-                Download
-              </a>
-            </div>
-          ))}
-        </div>
+                {/* Gambar */}
+                <img
+                  src={anime.poster}
+                  alt={batch.title}
+                  className="w-full aspect-[3/4] object-cover rounded-md mb-3"
+                />
+
+                {/* Konten utama */}
+                <div className="flex-grow">
+                  <h1 className="text-sm md:text-lg font-semibold mb-2">
+                    {batch.title}
+                  </h1>
+                </div>
+
+                {/* Tombol Download */}
+                <div className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md block text-center mt-3">
+                  Download
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Poster PopUp Modal */}
