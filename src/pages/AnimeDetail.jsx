@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   Star,
@@ -20,6 +20,8 @@ const AnimeDetail = () => {
   const [showFullSynopsis, setShowFullSynopsis] = useState(false);
   const [favoriteAnime, setFavoriteAnime] = useState([]);
   const [showPosterModal, setShowPosterModal] = useState(false);
+  const [batchList, setBatchList] = useState([]);
+  const navigate = useNavigate();
   // const { title } = useParams();
 
   // useEffect(() => {
@@ -34,6 +36,7 @@ const AnimeDetail = () => {
         );
         const data = await response.json();
         setAnime(data.data);
+        setBatchList(data.data.batchList);
         // console.log(data.data);
       } catch (error) {
         console.error("Error fetching anime details:", error);
@@ -92,8 +95,12 @@ const AnimeDetail = () => {
             />
             <div className="text-center md:text-left">
               <h1 className="text-2xl md:text-4xl font-bold text-white">
-                {anime.title}
+                {anime.english}
               </h1>
+              {/* <hr className="mt-2" /> */}
+              {/* <h1 className="text-2xl md:text-4xl font-bold text-white">
+                {anime.japanese}
+              </h1> */}
               <div className="flex flex-wrap gap-2 mt-2">
                 <span className="font-semibold text-white">Genres:</span>
                 {anime.genreList.map((genre) => (
@@ -144,6 +151,10 @@ const AnimeDetail = () => {
                   {anime.studios}
                 </span>
               </div>
+              {/* <h1 className="font-bold text-2xl">
+                Aired:{" "}
+                <span className="text-white text-lg pt-1">{anime.aired}</span>
+              </h1> */}
               <hr className="mt-3 mb-1" />
               <div className="font-semibold text-white text-2xl">
                 <h2>{anime.synonyms}</h2>
@@ -188,6 +199,45 @@ const AnimeDetail = () => {
             >
               Episode {episode.title}
             </Link>
+          ))}
+        </div>
+      </div>
+      <div className="mx-auto px-5 py-8">
+        <h1 className="w-full bg-gray-800 flex items-center p-5 font-bold text-2xl text-white rounded-lg">
+          Download Batch Anime: " {anime.english} "
+        </h1>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {batchList.map((batch, index) => (
+            <div
+              key={index}
+              className="bg-background p-4 rounded-xl shadow-xl text-foreground hover:scale-[1.03] transition-transform flex flex-col"
+            >
+              {/* Gambar */}
+              <img
+                src={anime.poster}
+                alt={batch.title}
+                className="w-full aspect-[3/4] object-cover rounded-md mb-3"
+              />
+
+              {/* Konten utama */}
+              <div className="flex-grow">
+                <h1 className="text-sm md:text-lg font-semibold mb-2">
+                  {batch.title}
+                </h1>
+              </div>
+
+              {/* Tombol Download */}
+              <a
+                onClick={() => {
+                  navigate(`/batch/${batch.batchId}`);
+                }}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md block text-center mt-3 cursor-pointer"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+              </a>
+            </div>
           ))}
         </div>
       </div>
