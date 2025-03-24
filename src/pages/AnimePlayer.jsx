@@ -37,7 +37,7 @@ const AnimePlayer = () => {
           setEpisodeData(data.data);
           saveToHistory(data.data);
           setRecommendedEpisodes(data.data.recommendedEpisodeList || []);
-          console.log("Episode data:", data.data);
+          // console.log("Episode data:", data.data);
           setDownloadData(data.data.downloadUrl);
         } else {
           console.error("Server tidak ditemukan.");

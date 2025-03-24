@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import Alert from "../components/Alert";
 
 const API_URLS = {
   recent: "https://wajik-anime-api.vercel.app/samehadaku/recent",
@@ -47,6 +48,7 @@ function Home() {
     nextPage: null,
     totalPages: 1,
   });
+  const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -254,6 +256,14 @@ function Home() {
                 <Trash className="w-5 h-5" />
                 <span>Clear History</span>
               </button>
+
+              {alert && (
+                <Alert
+                  type={alert.type}
+                  message={alert.message}
+                  onClose={() => setAlert(null)}
+                />
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
