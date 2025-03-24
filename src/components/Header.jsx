@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X, Search, User } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
+import { motion } from "framer-motion";
 
 function Header() {
   const [theme, setTheme] = useState("light");
@@ -13,6 +14,7 @@ function Header() {
     localStorage.getItem("accessToken")
   );
   const [userInfo, setUserInfo] = useState(null);
+  const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,10 +70,25 @@ function Header() {
       <nav className="fixed h-20 w-full bg-background/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border z-50">
         <div className="px-4">
           <div className="flex items-center justify-between h-20">
-            <div className="flex items-center">
-              <a href="/">
-                <img className="w-[65px] h-[65px]" src="/logo.png" alt="" />
+            <div
+              className="relative flex items-center gap-2"
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <a href="/" className="relative z-10">
+                <img className="w-[65px] h-[65px]" src="/logo.png" alt="Logo" />
               </a>
+
+              <motion.span
+                initial={{ x: -20, opacity: 0 }}
+                animate={
+                  hovered ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }
+                }
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="text-white text-lg font-bold"
+              >
+                AnimeStrim
+              </motion.span>
             </div>
 
             {/* Desktop Navigation */}
