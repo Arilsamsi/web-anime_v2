@@ -85,7 +85,7 @@ function Header() {
                   hovered ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }
                 }
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="text-white text-lg font-bold"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-900 text-lg font-bold"
               >
                 AnimeStrim
               </motion.span>
