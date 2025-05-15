@@ -10,6 +10,9 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [recentSearches, setRecentSearches] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  // const [animeList, setAnimeList] = useState([]);
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
@@ -26,15 +29,47 @@ function Header() {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
+  useEffect(() => {
+    const storedSearches =
+      JSON.parse(localStorage.getItem("recentSearches")) || [];
+    setRecentSearches(storedSearches);
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setSuggestions(recentSearches);
+    } else {
+      const filtered = recentSearches.filter((item) =>
+        item.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSuggestions(filtered);
+    }
+  }, [searchQuery, recentSearches]);
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const handleSearch = (e) => {
     if (e.key === "Enter" && searchQuery.trim() !== "") {
+      const stored = JSON.parse(localStorage.getItem("recentSearches")) || [];
+      const updated = [
+        searchQuery,
+        ...stored.filter((q) => q !== searchQuery),
+      ].slice(0, 5);
+      localStorage.setItem("recentSearches", JSON.stringify(updated));
+      setRecentSearches(updated);
+
       navigate(`/search?query=${searchQuery}`);
       setIsSearchOpen(false);
     }
+  };
+
+  const handleRemoveItem = (item) => {
+    const updated = recentSearches.filter((i) => i !== item);
+    setRecentSearches(updated);
+    setSuggestions(updated);
+    localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
 
   const handleLoginSuccess = (response) => {
@@ -204,15 +239,60 @@ function Header() {
 
       {isSearchOpen && (
         <div className="fixed top-20 left-0 w-full bg-black/50 backdrop-blur-md p-4 flex justify-center z-50">
-          <input
-            type="text"
-            className="relative w-full p-2 text-lg rounded-md bg-white dark:bg-gray-800 text-black dark:text-white outline-none"
-            placeholder="Search anime..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleSearch}
-          />
-          <Search className="absolute right-6 top-6" />
+          <div className="relative w-full max-w-xl">
+            {/* Search Input */}
+            <input
+              type="text"
+              className="w-full p-3 text-lg rounded-md bg-white dark:bg-gray-800 text-black dark:text-white outline-none"
+              placeholder="Search anime..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
+            />
+
+            {/* Recent Search Section */}
+            {/* Recent Search Section */}
+            {suggestions.length > 0 && (
+              <div className="mt-2 bg-background text-foreground dark:bg-gray-900 rounded-md shadow-md p-3">
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-gray-600 dark:text-gray-300 font-semibold text-sm uppercase tracking-wide">
+                    Recent Search
+                  </h2>
+                  <button
+                    className="text-xs text-red-500 hover:underline"
+                    onClick={() => {
+                      setRecentSearches([]);
+                      setSuggestions([]);
+                      localStorage.removeItem("recentSearches");
+                    }}
+                  >
+                    Clear All
+                  </button>
+                </div>
+                <ul className="space-y-2">
+                  {suggestions.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="flex justify-between items-center p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                      onClick={() => {
+                        setSearchQuery(item);
+                        navigate(`/search?query=${item}`);
+                        setIsSearchOpen(false);
+                      }}
+                    >
+                      <span className="cursor-pointer">{item}</span>
+                      <button
+                        className="text-red-400 text-xs hover:underline"
+                        onClick={() => handleRemoveItem(item)}
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
