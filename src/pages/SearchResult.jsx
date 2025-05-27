@@ -22,7 +22,7 @@ const SearchResult = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://wajik-anime-api.vercel.app/samehadaku/search?q=${query}`
+          `https://wajik-anime-api.vercel.app/otakudesu/search?q=${query}`
         );
 
         if (!response.ok) throw new Error("Gagal mengambil data dari server");

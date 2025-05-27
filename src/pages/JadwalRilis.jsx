@@ -13,7 +13,7 @@ const JadwalRilis = () => {
     const fetchSchedule = async () => {
       try {
         const response = await fetch(
-          "https://wajik-anime-api.vercel.app/samehadaku/schedule"
+          "https://wajik-anime-api.vercel.app/otakudesu/schedule"
         );
         const result = await response.json();
 

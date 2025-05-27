@@ -18,12 +18,12 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 
 const API_URLS = {
-  recent: "https://wajik-anime-api.vercel.app/samehadaku/recent",
-  ongoing: "https://wajik-anime-api.vercel.app/samehadaku/ongoing",
-  popular: "https://wajik-anime-api.vercel.app/samehadaku/popular",
-  completed: "https://wajik-anime-api.vercel.app/samehadaku/completed",
-  movies: "https://wajik-anime-api.vercel.app/samehadaku/movies",
-  batchList: "https://wajik-anime-api.vercel.app/samehadaku/batch",
+  recent: "https://wajik-anime-api.vercel.app/otakudesu/schedule",
+  ongoing: "https://wajik-anime-api.vercel.app/otakudesu/ongoing",
+  // popular: "https://wajik-anime-api.vercel.app/otakudesu/popular",
+  completed: "https://wajik-anime-api.vercel.app/otakudesu/completed",
+  movies: "https://wajik-anime-api.vercel.app/otakudesu/movies",
+  // batchList: "https://wajik-anime-api.vercel.app/otakudesu/batch",
 };
 
 function Home() {
@@ -32,12 +32,12 @@ function Home() {
   // });
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("recent");
+  const [activeTab, setActiveTab] = useState("schedule");
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [history, setHistory] = useState([]);
-  const [batchList, setBatchList] = useState([]);
+  // const [batchList, setBatchList] = useState([]);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
@@ -51,29 +51,29 @@ function Home() {
   const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchBatchAnime = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `https://wajik-anime-api.vercel.app/samehadaku/batch?page=${page}`
-        );
-        const result = await response.json();
+  // useEffect(() => {
+  //   const fetchBatchAnime = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await fetch(
+  //         `https://wajik-anime-api.vercel.app/otakudesu/batch?page=${page}`
+  //       );
+  //       const result = await response.json();
 
-        if (result.data && result.data.batchList) {
-          setBatchList(result.data.batchList);
-          setPagination(result.pagination);
-        } else {
-          setError("Data tidak ditemukan.");
-        }
-      } catch (err) {
-        setError("Gagal mengambil data.");
-      }
-      setLoading(false);
-    };
+  //       if (result.data && result.data.batchList) {
+  //         setBatchList(result.data.batchList);
+  //         setPagination(result.pagination);
+  //       } else {
+  //         setError("Data tidak ditemukan.");
+  //       }
+  //     } catch (err) {
+  //       setError("Gagal mengambil data.");
+  //     }
+  //     setLoading(false);
+  //   };
 
-    fetchBatchAnime();
-  }, [page]);
+  //   fetchBatchAnime();
+  // }, [page]);
 
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
@@ -307,101 +307,6 @@ function Home() {
           </div>
         )}
       </main>
-
-      {/* Batch Download List */}
-      <div className="min-h-screen container px-5 bg-background text-foreground p-5">
-        <h1 className="text-2xl bg-gray-900 p-3 font-bold text-white text-center mb-5">
-          Download Batch Anime
-        </h1>
-
-        {error && <p className="text-center text-red-500">{error}</p>}
-        {loading && <p className="text-center text-gray-500">Loading...</p>}
-
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {batchList.map((anime, index) => (
-            <div
-              key={index}
-              className="bg-background p-4 rounded-xl shadow-xl text-foreground hover:scale-[1.03] transition-transform flex flex-col"
-            >
-              {/* Gambar */}
-              <img
-                src={anime.poster}
-                alt={anime.title}
-                className="w-full aspect-[3/4] object-cover rounded-md mb-3"
-              />
-
-              {/* Konten utama */}
-              <div className="flex-grow">
-                <h1 className="text-sm md:text-lg font-semibold mb-2">
-                  {anime.title}
-                </h1>
-
-                {/* Genre List */}
-                <p className="text-sm text-gray-400 mb-2">
-                  {anime.genreList?.map((genre) => genre.title).join(", ")}
-                </p>
-
-                {/* Score & Status */}
-                <p className="text-sm text-gray-500">
-                  <strong>Score:</strong> {anime.score} <br />
-                  <strong>Status:</strong> {anime.status}
-                </p>
-              </div>
-
-              {/* Tombol Download */}
-              <a
-                onClick={() => {
-                  navigate(`/batch/${anime.batchId}`);
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md block text-center mt-3 cursor-pointer"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download
-              </a>
-            </div>
-          ))}
-        </div>
-
-        {/* Pagination */}
-        <div className="flex justify-center items-center gap-3 mt-8">
-          <button
-            onClick={() => setPage(pagination.prevPage)}
-            disabled={!pagination.hasPrevPage}
-            className={`flex items-center justify-center px-2 py-2 rounded-md ${
-              !pagination.hasPrevPage
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700"
-            } text-white`}
-          >
-            {!pagination.hasPrevPage ? (
-              <Ban className="w-6 h-6" />
-            ) : (
-              <ChevronLeftCircle className="w-6 h-6" />
-            )}
-          </button>
-
-          <span className="text-lg font-semibold">
-            {pagination.currentPage} / {pagination.totalPages}
-          </span>
-
-          <button
-            onClick={() => setPage(pagination.nextPage)}
-            disabled={!pagination.hasNextPage}
-            className={`flex items-center justify-center px-2 py-2 rounded-md ${
-              !pagination.hasNextPage
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700"
-            } text-white`}
-          >
-            {!pagination.hasNextPage ? (
-              <Ban className="w-6 h-6" />
-            ) : (
-              <ChevronRightCircle className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

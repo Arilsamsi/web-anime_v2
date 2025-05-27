@@ -11,7 +11,7 @@ const GenreDetail = () => {
   const [genreList, setGenreList] = useState([]);
 
   useEffect(() => {
-    fetch(`https://wajik-anime-api.vercel.app/samehadaku/genres/${genreId}`)
+    fetch(`https://wajik-anime-api.vercel.app/otakudesu/genres/${genreId}`)
       .then((res) => res.json())
       .then((data) => {
         setAnimeList(data.data.animeList || []);

@@ -9,7 +9,7 @@ const MoviesList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://wajik-anime-api.vercel.app/samehadaku/movies")
+    fetch("https://wajik-anime-api.vercel.app/otakudesu/movies")
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.data.animeList || []);

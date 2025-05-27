@@ -12,7 +12,7 @@ const BatchDownload = () => {
     const fetchAnimeDetail = async () => {
       try {
         const response = await fetch(
-          `https://wajik-anime-api.vercel.app/samehadaku/batch/${batchId}`
+          `https://wajik-anime-api.vercel.app/otakudesu/batch/${batchId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");

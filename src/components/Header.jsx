@@ -150,19 +150,6 @@ function Header() {
                 <Search />
               </button>
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              {/* Tampilkan tombol login atau ikon profil */}
-              {accessToken ? (
-                <button onClick={goToProfile} className="flex items-center">
-                  <User className="w-6 h-6" />
-                </button>
-              ) : (
-                <button
-                  onClick={login}
-                  className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white"
-                >
-                  Login
-                </button>
-              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -182,20 +169,6 @@ function Header() {
                 )}
               </button>
               <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-              <div>
-                {accessToken ? (
-                  <button onClick={goToProfile} className="flex items-center">
-                    <User className="w-6 h-6" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={login}
-                    className="bg-red-500 space-x-2 ml-1 px-3 py-2 rounded-sm hover:bg-red-700 transition-colors text-white"
-                  >
-                    Login
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         </div>

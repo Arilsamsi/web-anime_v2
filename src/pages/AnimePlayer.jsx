@@ -29,7 +29,7 @@ const AnimePlayer = () => {
     const fetchEpisode = async () => {
       try {
         const response = await fetch(
-          `https://wajik-anime-api.vercel.app/samehadaku/episode/${episodeId}`
+          `https://wajik-anime-api.vercel.app/otakudesu/episode/${episodeId}`
         );
         const data = await response.json();
 

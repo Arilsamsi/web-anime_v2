@@ -8,7 +8,7 @@ const GenreList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://wajik-anime-api.vercel.app/samehadaku/genres")
+    fetch("https://wajik-anime-api.vercel.app/otakudesu/genres")
       .then((res) => res.json())
       .then((data) => {
         const sortedGenres = data.data.genreList.sort((a, b) =>

@@ -32,7 +32,7 @@ const AnimeDetail = () => {
     const fetchAnimeDetail = async () => {
       try {
         const response = await fetch(
-          `https://wajik-anime-api.vercel.app/samehadaku/anime/${animeId}`
+          `https://wajik-anime-api.vercel.app/otakudesu/anime/${animeId}`
         );
         const data = await response.json();
         setAnime(data.data);
